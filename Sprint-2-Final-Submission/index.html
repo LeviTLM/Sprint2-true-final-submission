@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="style.css" />
+        <title>MemeGen</title>
+    </head>
+
+    <body onload="onInit()">
+        <div class="app-layout">
+            <div class="main-screen" onclick="toggleMenu()"></div>
+            <header>
+                <div class="header-container">
+                    <div class="header-container main-layout">
+                        <div class="logo"><img class="logo-img" src="img/LOGO.png" /></div>
+                        <div class="nav-container">
+                            <button class="a-btns" onclick="onHideEditor()">Gallery</button>
+                            <button class="a-btns" onclick="onShowSaved()">Memes</button>
+                            <button onclick="onHideEditor()" href="#about"><a href="index.html#about">About</a></button>
+                        </div>
+                        <button class="btn-menu" onclick="toggleMenu()">☰</button>
+                    </div>
+                </div>
+            </header>
+
+            <main>
+                <div class="search-container main-layout">
+                    <div class="search-container">
+                        <input type="text" class="search-input" placeholder="Search" />
+                        <button onclick="onSearch()" class="search-btn">🔍</button>
+                    </div>
+                    <div class="keywords-container"></div>
+                </div>
+
+                <div class="gallery-container">
+                    <div class="gallery-container main-layout"></div>
+                </div>
+
+                <div class="editor-container main-layout" style="display: none">
+                    <div class="canvas-container">
+                        <canvas id="my-canvas" width="476" height="546"></canvas>
+                    </div>
+                    <div class="tools-container">
+                        <div class="line-tools">
+                            <input class="meme-text" placeholder="Enter meme text" oninput="onUpdateLine('typeText',this.value)" />
+                            <div class="line-editors">
+                                <button onclick="onUpdateLine('textUp')">&#8593;</button>
+                                <button onclick="onUpdateLine('textDown')">&#8595;</button>
+                                <button onclick="onSwitchLines()">&#8693;</button>
+                                <button onclick="onAddLine()">+</button>
+                                <button onclick="onDeleteLine()">🗑</button>
+                            </div>
+                        </div>
+                        <div class="text-editors">
+                            <div class="text-size-align">
+                                <button onclick="onUpdateLine('increaseFont')">A</button>
+                                <button onclick="onUpdateLine('decreaseFont')">a</button>
+                                <button class="left" onclick="onUpdateLine('align-left')">⬅</button>
+                                <button class="center" onclick="onUpdateLine('align-center')">⁐</button>
+                                <button class="rigth" onclick="onUpdateLine('align-right')">➡</button>
+                            </div>
+                            <div class="text-family-color">
+                                <select name="font-family" id="font-family" onchange="onUpdateLine('font-family',this.value)" class="family-select">
+                                    <option value="" disabled selected>Font Family</option>
+                                    <option value="impact">Impact</option>
+                                    <option value="Ariel">Ariel</option>
+                                </select>
+                                <input type="color" class="stroke-color" onchange="onUpdateLine('stroke-color',this.value)" />
+                                <input type="color" class="fill-color" value="#ffffff" onchange="onUpdateLine('fill-color',this.value)" />
+                            </div>
+                        </div>
+
+                        <div class="choose-files-container">
+                            <input type="file" value="Choose File" class="file-input btn" name="image" title="none" onchange="onImgInput(event)" />
+                        </div>
+
+                        <div class="upload-services">
+                            <button class="upload-btn" onclick="onUploadImg()">Upload</button>
+                            <button onclick="onDownloadImg()">Download</button>
+                            <button class="save-btn" onclick="onSaveMeme()">Save</button>
+                        </div>
+                    </div>
+                </div>
+                <button class="share-btn" style="display: none"></button>
+            </main>
+
+            <footer>
+                <div class="about-container" name="about" id="about">
+                    <div class="about-img"><img class="my-img" src="/img/me.jpeg" /></div>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <span style="font-weight: bold">Roy Leybovitch</span> <br />
+                            Thank you for visiting my Meme Generator! <br />I Hope to see you soon again! <br />
+                            If you liked it please share it with your friends and follow me on social networks:
+                        </div>
+                        <ul class="social-nav clean-list">
+                            <li>
+                                <a class="twitter" href="https://www.twitter.com" target="_blank"><img src="img/nav2.png" /></a>
+                            </li>
+                            <li>
+                                <a class="facebook" href="https://www.facebook.com" target="_blank"><img src="img/nav1.png" /></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+        <script src="controller.js"></script>
+        <script src="services/util.js"></script>
+        <script src="services/upload-service.js"></script>
+        <script src="services/storage-service.js"></script>
+        <script src="services/meme-service.js"></script>
+    </body>
+</html>
